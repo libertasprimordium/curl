@@ -1,5 +1,5 @@
-#ifndef HEADER_CURL_QUIC_H
-#define HEADER_CURL_QUIC_H
+#ifndef HEADER_CURL_Q_QUICHE_H
+#define HEADER_CURL_Q_QUICHE_H
 /***************************************************************************
  *                                  _   _ ____  _
  *  Project                     ___| | | |  _ \| |
@@ -42,14 +42,6 @@ struct quicsocket {
   uint32_t version;
 };
 
-#include "urldata.h"
-
-CURLcode Curl_quic_connect(struct connectdata *conn, curl_socket_t sockfd);
-
-CURLcode Curl_quic_is_connected(struct connectdata *conn, int sockindex,
-                                bool *done);
-
-int Curl_quic_ver(char *p, size_t len);
 #endif
 
-#endif /* HEADER_CURL_QUIC_H */
+#endif /* HEADER_CURL_Q_QUICHE_H */

@@ -49,10 +49,13 @@ static Curl_recv quic_stream_recv;
 static Curl_send quic_stream_send;
 
 
-CURLcode Curl_quic_connect(struct connectdata *conn, curl_socket_t sockfd)
+CURLcode Curl_quic_connect(struct connectdata *conn, curl_socket_t sockfd,
+                           const struct sockaddr *addr, socklen_t addrlen)
 {
   CURLcode result;
   struct quicsocket *qs = &conn->quic;
+  (void)addr;
+  (void)addrlen;
 
   infof(conn->data, "Connecting socket %d over QUIC\n", sockfd);
 

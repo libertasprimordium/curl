@@ -32,6 +32,8 @@
 #include "q-quiche.h"
 #endif
 
+#include "urldata.h"
+
 /* generic */
 const char *Curl_quic_backend(void);
 
