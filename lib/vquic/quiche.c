@@ -167,8 +167,8 @@ static ssize_t quic_stream_recv(struct connectdata *conn,
                                 size_t buffersize,
                                 CURLcode *curlcode)
 {
+  bool fin;
   ssize_t recvd;
-  quiche_rangebuf *data;
   struct quicsocket *qs = &conn->quic;
   curl_socket_t sockfd = conn->sock[sockindex];
 
@@ -177,18 +177,16 @@ static ssize_t quic_stream_recv(struct connectdata *conn,
     return -1;
   }
 
-  data = quiche_conn_stream_recv(qs->conn, 0, buffersize);
-  if(data == NULL) {
+  recvd = quiche_conn_stream_recv(qs->conn, 0, (uint8_t *) buf, buffersize, &fin);
+  if(recvd == QUICHE_ERR_DONE) {
     *curlcode = CURLE_AGAIN;
     return -1;
   }
 
-  recvd = quiche_rangebuf_len(data);
-
-  if(recvd > 0)
-    memcpy(buf, quiche_rangebuf_data(data), recvd);
-
-  quiche_rangebuf_free(data);
+  if(recvd < 0) {
+    *curlcode = CURLE_RECV_ERROR;
+    return -1;
+  }
 
   *curlcode = CURLE_OK;
   return recvd;
