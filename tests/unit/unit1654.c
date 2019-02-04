@@ -36,10 +36,11 @@ unit_stop(void)
   curl_global_cleanup();
 }
 
-#ifdef CURL_DISABLE_HTTP
+#if defined(CURL_DISABLE_HTTP) || !defined(USE_ALTSVC)
 UNITTEST_START
 {
-  return 0; /* nothing to do when HTTP is disabled */
+  return 0; /* nothing to do when HTTP is disabled or alt-svc support is
+               missing */
 }
 #else
 UNITTEST_START

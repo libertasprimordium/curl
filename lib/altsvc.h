@@ -23,7 +23,7 @@
  ***************************************************************************/
 #include "curl_setup.h"
 
-#if !defined(CURL_DISABLE_HTTP) && !defined(CURL_DISABLE_ALTSVC)
+#if !defined(CURL_DISABLE_HTTP) && defined(USE_ALTSVC)
 
 #include <curl/curl.h>
 #include "llist.h"
@@ -62,5 +62,5 @@ CURLcode Curl_altsvc_parse(struct Curl_easy *data,
                            struct altsvcinfo *altsvc, const char *value,
                            enum alpnid srcalpn, const char *srchost,
                            unsigned short srcport);
-#endif /* CURL_DISABLE_HTTP || CURL_DISABLE_ALTSVC */
+#endif /* CURL_DISABLE_HTTP || USE_ALTSVC */
 #endif /* HEADER_CURL_ALTSVC_H */
