@@ -1826,7 +1826,7 @@ struct Curl_easy {
                                   NOTE that the 'cookie' field in the
                                   UserDefined struct defines if the "engine"
                                   is to be used or not. */
-  struct altsvcinfo *altsvc;   /* the alt-svc cache */
+  struct altsvcinfo *asi;      /* the alt-svc cache */
   struct Progress progress;    /* for all the progress meter data */
   struct UrlState state;       /* struct for fields used for state info and
                                   other dynamic purposes */
