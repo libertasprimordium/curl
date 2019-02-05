@@ -87,6 +87,10 @@ matrix:
         - os: linux
           compiler: clang
           dist: trusty
+          env: T=debug C="--enable-alt-svc"
+        - os: linux
+          compiler: clang
+          dist: trusty
           env: T=debug C="--with-mbedtls --without-ssl"
         - os: linux
           compiler: clang
